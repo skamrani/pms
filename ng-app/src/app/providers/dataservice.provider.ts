@@ -39,7 +39,6 @@ export class UserService {
 
     constructor(private http: CustomHttp) {
         //testing api call
-        this.http.get('test', (res: any) => console.log(res));
     }
 
     login(data: any, callback?: Function) {

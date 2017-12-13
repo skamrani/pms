@@ -1,12 +1,15 @@
 import {Component} from '@angular/core';
+import {AuthGuard} from '../providers/auth.provider';
 
 @Component({
     selector: 'app-root',
     templateUrl: '../views/app.component.html',
 })
 export class AppComponent {
-    title = 'app';
-    constructor() {
-        console.log('testing');
+
+    public userLogedIn;
+
+    constructor(private authGaurd: AuthGuard) {
+        this.userLogedIn = this.authGaurd.userLogedIn;
     }
 }
