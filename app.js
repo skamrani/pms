@@ -15,6 +15,35 @@ const Sequelize = require('./config/sequelize');
 //Initialize express
 const app = express();
 
+app.use(function (req, res, next) {
+    //allowing ng app to call this server
+    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+    res.header("'Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Credentials", true);
+    next();
+});
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
+app.set('view engine', 'handlebars');
+
+
+
+app.use(session({
+    secret: 'centricsource',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {secure: false, httpOnly: false}
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Loading all controllers found in controller's directory
 var controllers = fs.readdirSync(appConfig.dirControllers);
 for (var i in controllers) {
@@ -28,32 +57,7 @@ for (var i in controllers) {
     app.use('/' + baseRoute, controller);
 }
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
-app.set('view engine', 'handlebars');
 
-app.use(function (req, res, next) {
-    //allowing ng app to call this server
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header("'Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Credentials", true);
-    next();
-});
-
-app.use(session({
-    secret: 'centricsource',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {secure: false, httpOnly: false}
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.get('/test', (req, res) => {
     let body = req.body || {status: false, data: nul};
