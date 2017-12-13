@@ -12,7 +12,8 @@ export class AuthGuard implements CanActivate {
     }
 
     canActivate() {
-        console.log('Checking if user cookie exists...');
+        this.userLogedIn = this.cookie.check("connect.sid");
+        console.log('Checking if user cookie exists...', this.cookie.check("connect.sid"));
         //check is user is loged in 
         if (this.userLogedIn) {
             return true;

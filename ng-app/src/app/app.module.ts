@@ -15,12 +15,18 @@ import {HeaderComponent} from './components/header.component';
 import {SidebarComponent} from './components/sidebar.component';
 import {LoginComponent} from './components/login.component';
 import {BlankComponent} from './components/blank.component';
+import {DashboardComponent} from './components/dashboard.component';
 
 const appRoutes: Routes = [
     {
         path: '',
-        component: BlankComponent,
-        canActivate: [AuthGuard],
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'login',
@@ -31,6 +37,7 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
+        DashboardComponent,
         HeaderComponent,
         SidebarComponent,
         LoginComponent,

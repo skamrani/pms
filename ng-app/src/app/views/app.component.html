@@ -1,11 +1,11 @@
+<router-outlet></router-outlet>
 
-<div *ngIf="userLogedIn; else loginBlock">
+<!--<div *ngIf="userLogedIn; else loginBlock">
     <app-header></app-header>
     <app-sidebar></app-sidebar>
     <div class="wrapper">
         <div class="content-wrapper">
             <h2>{{userLogedIn}}</h2>
-            <router-outlet></router-outlet>
         </div>
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
@@ -17,6 +17,7 @@
     </div>
 </div>
 <ng-template #loginBlock>
+    <h2>{{userLogedIn}}</h2>
     <app-login></app-login>
-</ng-template>
+</ng-template>-->
 

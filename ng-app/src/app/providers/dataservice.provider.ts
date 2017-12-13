@@ -45,4 +45,9 @@ export class UserService {
         console.log('Calling user/login');
         this.http.post('user/login', data, callback);
     }
+
+    logout(callback?: Function) {
+        console.log('Calling user/logout');
+        this.http.get('user/logout', callback);
+    }
 }
