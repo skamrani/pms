@@ -1,7 +1,7 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const Sequelize = require('./sequelize');
-let userModel = Sequelize.loadModel('user');
+let userModel = Sequelize.loadModel('users');
 
 
 passport.use(new LocalStrategy({

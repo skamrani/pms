@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const users = require('../models/users.model');
 
 module.exports = (Sequelize, passport, appConfig) => {
-
-    let userModel = Sequelize.loadModel('user');
+    console.log('in user controller')
+    let userModel = Sequelize.loadModel('users');
 
     router.post('/login', (req, res, next) => {
         passport.authenticate('local', function (err, user, info) {
@@ -37,5 +38,11 @@ module.exports = (Sequelize, passport, appConfig) => {
 //        res.send('user has lodged in ');
 //    });
 
+    router.get('/roles', (req, res) => {
+
+        var users = userModel.findAll();
+
+        res.send(users);
+    });
     return router;
 };
