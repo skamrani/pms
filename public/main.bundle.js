@@ -35,7 +35,8 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_sidebar_component__ = __webpack_require__("../../../../../src/app/components/sidebar.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_login_component__ = __webpack_require__("../../../../../src/app/components/login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_blank_component__ = __webpack_require__("../../../../../src/app/components/blank.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_dashboard_component__ = __webpack_require__("../../../../../src/app/components/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_register_component__ = __webpack_require__("../../../../../src/app/components/register.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_dashboard_component__ = __webpack_require__("../../../../../src/app/components/dashboard.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,20 +60,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var appRoutes = [
     {
         path: '',
-        component: __WEBPACK_IMPORTED_MODULE_13__components_dashboard_component__["a" /* DashboardComponent */],
+        component: __WEBPACK_IMPORTED_MODULE_14__components_dashboard_component__["a" /* DashboardComponent */],
         canActivate: [__WEBPACK_IMPORTED_MODULE_7__providers_auth_provider__["a" /* AuthGuard */]]
     },
     {
         path: 'dashboard',
-        component: __WEBPACK_IMPORTED_MODULE_13__components_dashboard_component__["a" /* DashboardComponent */],
+        component: __WEBPACK_IMPORTED_MODULE_14__components_dashboard_component__["a" /* DashboardComponent */],
         canActivate: [__WEBPACK_IMPORTED_MODULE_7__providers_auth_provider__["a" /* AuthGuard */]]
     },
     {
-        path: 'login',
-        component: __WEBPACK_IMPORTED_MODULE_11__components_login_component__["a" /* LoginComponent */]
+        path: 'login', component: __WEBPACK_IMPORTED_MODULE_11__components_login_component__["a" /* LoginComponent */]
+    },
+    {
+        path: 'register', component: __WEBPACK_IMPORTED_MODULE_13__components_register_component__["a" /* RegisterComponent */]
     }
 ];
 var AppModule = (function () {
@@ -83,11 +87,12 @@ var AppModule = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_8__components_app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__components_dashboard_component__["a" /* DashboardComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__components_dashboard_component__["a" /* DashboardComponent */],
                 __WEBPACK_IMPORTED_MODULE_9__components_header_component__["a" /* HeaderComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__components_sidebar_component__["a" /* SidebarComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__components_login_component__["a" /* LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__components_blank_component__["a" /* BlankComponent */]
+                __WEBPACK_IMPORTED_MODULE_12__components_blank_component__["a" /* BlankComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__components_register_component__["a" /* RegisterComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -284,17 +289,11 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.onSubmit = function (form) {
         var _this = this;
-        if (form.valid) {
-            console.log('Submiting form...');
-            this.service.login({ username: this.username, password: this.password }, function (res) {
-                if (res.data.user_id) {
-                    _this.router.navigate(["dashboard"]);
-                }
-            });
-        }
-        else {
-            window.alert('Please enter a valid Username & Password');
-        }
+        this.service.login({ username: this.username, password: this.password }, function (res) {
+            if (res.data.user_id) {
+                _this.router.navigate(["dashboard"]);
+            }
+        });
     };
     LoginComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -304,6 +303,81 @@ var LoginComponent = (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_dataservice_provider__["b" /* UserService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_3_ngx_cookie_service__["a" /* CookieService */]])
     ], LoginComponent);
     return LoginComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/register.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_dataservice_provider__ = __webpack_require__("../../../../../src/app/providers/dataservice.provider.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var RegisterComponent = (function () {
+    function RegisterComponent(service) {
+        this.service = service;
+        // Roles call from db for now its static
+        this.roles = [
+            { id: 1, text: 'Employee' },
+            { id: 2, text: 'TeamLead' },
+            { id: 3, text: 'Admin' },
+        ];
+        this.teams = [
+            { id: 1, text: 'Innovation' },
+            { id: 2, text: 'Activation' },
+            { id: 3, text: 'Calibration' },
+            { id: 4, text: 'Web Service' },
+            { id: 5, text: 'Mobile Application Development' },
+            { id: 6, text: 'Document' },
+            { id: 6, text: 'Quality Assurance' },
+        ];
+        this.role = [];
+    }
+    RegisterComponent.prototype.ngOnInit = function () {
+        console.log('Register component initialized');
+    };
+    RegisterComponent.prototype.onSubmit = function (form) {
+        if (form.valid) {
+            this.service.register({ email: this.email, username: this.username, password: this.password, team: this.team, role: this.role }, function (data) {
+                console.log(data);
+            });
+        }
+        else {
+            window.alert('Please enter a valid Username & Password');
+        }
+    };
+    RegisterComponent.prototype.updateRoles = function (event) {
+        if (event.target.checked) {
+            this.role.push(event.target.value);
+        }
+        else {
+            this.role.splice(this.role.indexOf(event.target.value), 1);
+        }
+        console.log("RoleID: ", event.target.value);
+        console.log("RoleValue: ", this.role);
+    };
+    RegisterComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-register',
+            template: __webpack_require__("../../../../../src/app/views/register.component.html"),
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_dataservice_provider__["b" /* UserService */]])
+    ], RegisterComponent);
+    return RegisterComponent;
 }());
 
 
@@ -449,6 +523,10 @@ var UserService = (function () {
         console.log('Calling user/login');
         this.http.post('user/login', data, callback);
     };
+    UserService.prototype.register = function (data, callback) {
+        console.log('Calling user/register');
+        this.http.post('user/register', data, callback);
+    };
     UserService.prototype.logout = function (callback) {
         console.log('Calling user/logout');
         this.http.get('user/logout', callback);
@@ -467,7 +545,7 @@ var UserService = (function () {
 /***/ "../../../../../src/app/views/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\n\n<!--<div *ngIf=\"userLogedIn; else loginBlock\">\n    <app-header></app-header>\n    <app-sidebar></app-sidebar>\n    <div class=\"wrapper\">\n        <div class=\"content-wrapper\">\n            <h2>{{userLogedIn}}</h2>\n        </div>\n        <footer class=\"main-footer\">\n            <div class=\"pull-right hidden-xs\">\n                <b>Version</b> 2.4.0\n            </div>\n            <strong>Copyright &copy; 2014-2016 <a href=\"https://adminlte.io\">Almsaeed Studio</a>.</strong> All rights\n            reserved.\n        </footer>\n    </div>\n</div>\n<ng-template #loginBlock>\n    <h2>{{userLogedIn}}</h2>\n    <app-login></app-login>\n</ng-template>-->\n\n"
+module.exports = "<router-outlet></router-outlet>\r\n\r\n<!--//conditiion if not loged in-->\r\n<!--display only login component-->\r\n<!--<app-login></app-login>-->\r\n\r\n<app-header></app-header>\r\n<app-sidebar></app-sidebar>\r\n\r\n<div class=\"wrapper\">\r\n\r\n\r\n    <div class=\"content-wrapper\">\r\n        <router-outlet></router-outlet>\r\n    </div>\r\n\r\n\r\n    <footer class=\"main-footer\">\r\n        <div class=\"pull-right hidden-xs\">\r\n            <b>Version</b> 2.4.0\r\n        </div>\r\n        <strong>Copyright &copy; 2014-2016 <a href=\"https://adminlte.io\">Almsaeed Studio</a>.</strong> All rights\r\n        reserved.\r\n    </footer>\r\n</div>\r\n\r\n<!--<div *ngIf=\"userLogedIn; else loginBlock\">\r\n    <app-header></app-header>\r\n    <app-sidebar></app-sidebar>\r\n    <div class=\"wrapper\">\r\n        <div class=\"content-wrapper\">\r\n            <h2>{{userLogedIn}}</h2>\r\n        </div>\r\n        <footer class=\"main-footer\">\r\n            <div class=\"pull-right hidden-xs\">\r\n                <b>Version</b> 2.4.0\r\n            </div>\r\n            <strong>Copyright &copy; 2014-2016 <a href=\"https://adminlte.io\">Almsaeed Studio</a>.</strong> All rights\r\n            reserved.\r\n        </footer>\r\n    </div>\r\n</div>\r\n<ng-template #loginBlock>\r\n    <h2>{{userLogedIn}}</h2>\r\n    <app-login></app-login>\r\n</ng-template>-->\r\n\r\n"
 
 /***/ }),
 
@@ -495,7 +573,14 @@ module.exports = "<header class=\"main-header\">\n    <!-- Logo -->\n    <a href
 /***/ "../../../../../src/app/views/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"login-box\">\n    <div class=\"login-logo\">\n        <a href=\"../../index2.html\"><b>Admin</b>LTE</a>\n    </div>\n    <!-- /.login-logo -->\n    <div class=\"login-box-body\">\n        <p class=\"login-box-msg\">Sign in to start your session</p>\n        <form #frm=\"ngForm\" (ngSubmit)=\"onSubmit(frm)\">\n            <div class=\"form-group has-feedback\">\n                <input type=\"email\" name=\"username\" [(ngModel)]=\"username\"  required=\"required\" class=\"form-control\" placeholder=\"m.zubair@centricsource.com\">\n                <span class=\"glyphicon glyphicon-envelope form-control-feedback\"></span>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <input type=\"password\" name=\"password\" [(ngModel)]=\"password\" required=\"required\" class=\"form-control\" placeholder=\"Password\">\n                <span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-xs-8\">\n                    <div class=\"checkbox icheck\">\n                        <label>\n                            <input type=\"checkbox\"> Remember Me\n                        </label>\n                    </div>\n                </div>\n                <!-- /.col -->\n                <div class=\"col-xs-4\">\n                    <button type=\"submit\" class=\"btn btn-primary btn-block btn-flat\">Sign In</button>\n                </div>\n                <!-- /.col -->\n            </div>\n        </form>\n\n        <a href=\"#\">I forgot my password</a><br>\n        <a href=\"register.html\" class=\"text-center\">Register a new membership</a>\n\n    </div>\n    <!-- /.login-box-body -->\n</div>"
+module.exports = "<div class=\"login-box\">\r\n    <div class=\"login-logo\">\r\n        <a href=\"../../index2.html\"><b>Admin</b>LTE</a>\r\n    </div>\r\n    <!-- /.login-logo -->\r\n    <div class=\"login-box-body\">\r\n        <p class=\"login-box-msg\">Sign in to start your session</p>\r\n        <form #frm=\"ngForm\" (ngSubmit)=\"onSubmit(frm)\">\r\n            <div class=\"form-group has-feedback\">\r\n                <input type=\"email\" name=\"username\" [(ngModel)]=\"username\"  required=\"required\" class=\"form-control\" placeholder=\"m.zubair@centricsource.com\">\r\n                <span class=\"glyphicon glyphicon-envelope form-control-feedback\"></span>\r\n\r\n            </div>\r\n            <div class=\"form-group has-feedback\">\r\n                <input type=\"password\" name=\"password\" [(ngModel)]=\"password\" required=\"required\" class=\"form-control\" placeholder=\"Password\">\r\n                <span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-8\">\r\n                    <div class=\"checkbox icheck\">\r\n                        <label>\r\n                            <input type=\"checkbox\"> Remember Me\r\n                        </label>\r\n                    </div>\r\n                </div>\r\n                <!-- /.col -->\r\n                <div class=\"col-xs-4\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block btn-flat\">Sign In</button>\r\n                </div>\r\n                <!-- /.col -->\r\n            </div>\r\n        </form>\r\n\r\n        <a href=\"#\">I forgot my password</a><br>\r\n        <a href=\"register.html\" class=\"text-center\">Register a new membership</a>\r\n\r\n    </div>\r\n    <!-- /.login-box-body -->\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/views/register.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\r\n<!--Content Header (Page header)-->\r\n<section class=\"content-header\">\r\n  <h1>\r\n    Register User !\r\n    <small>it all starts here</small>\r\n  </h1>\r\n  <ol class=\"breadcrumb\">\r\n    <li><a href=\"#\"><i class=\"fa fa-dashboard\"></i> User</a></li>\r\n    <li><a  class=\"active\" href=\"#\">Register</a></li>\r\n  </ol>\r\n</section>\r\n\r\n<!--Main content-->\r\n<section class=\"content\">\r\n\r\n  <!--Default box-->\r\n  <div class=\"box\" style=\"background:none!important\">\r\n    <div class=\"box-header with-border\">\r\n\r\n    </div>\r\n    <div class=\"box-body\">\r\n      <!--Start creating your amazing application!-->\r\n      <div class=\"register-box\">\r\n        <div class=\"register-logo\">\r\n          <a href=\"\"><b>Create</b>User</a>\r\n        </div>\r\n\r\n        <div class=\"register-box-body\">\r\n          <p class=\"login-box-msg\">Register a new membership</p>\r\n          <form #frm=\"ngForm\" (ngSubmit)=\"onSubmit(frm)\">\r\n\r\n            <div class=\"form-group has-feedback\">\r\n              <input type=\"email\" class=\"form-control\" name=\"email\" id=\"email\" placeholder=\"User Email\" [(ngModel)]=\"email\">\r\n              <span class=\"glyphicon glyphicon-user form-control-feedback\"></span>\r\n            </div>\r\n            <div class=\"form-group has-feedback\">\r\n              <input type=\"name\"  id=\"username\" name=\"username\" class=\"form-control\" placeholder=\"Employee Name\" [(ngModel)]=\"username\">\r\n              <span class=\"glyphicon glyphicon-envelope form-control-feedback\"></span>\r\n            </div>\r\n            <div class=\"form-group has-feedback\">\r\n              <input type=\"password\" class=\"form-control\" placeholder=\"Password\" name=\"password\" id=\"password\" [(ngModel)]=\"password\">\r\n              <span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label>Assgin Team</label>\r\n              <select class=\"form-control\" name=\"team\" id=\"team\" [(ngModel)]=\"team\" >\r\n                <option  *ngFor=\"let team of teams\"  value=\"{{team.id}}\">{{team.text}}</option>\r\n              </select>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label>Role</label>\r\n              <div class=\"checkbox\" *ngFor=\"let role of roles\">\r\n                <label><input  (change) =\"updateRoles($event)\"  id= \"{{role.id}}\"type=\"checkbox\" name=\"role\" value=\"{{role.id}}\">{{role.text}}</label>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"row\">\r\n              <div class=\"col-xs-8\">\r\n                <div class=\"checkbox icheck\" style=\"display: none;\">\r\n                  <label class=\"\">\r\n                    <div class=\"icheckbox_square-blue\" aria-checked=\"false\" aria-disabled=\"false\" style=\"position: relative; \">\r\n                      <input type=\"checkbox\" style=\"position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;\"><ins class=\"iCheck-helper\" style=\"position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;\"></ins></div> I agree to the <a href=\"#\">terms</a>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <!-- /.col -->\r\n              <div class=\"col-xs-4\">\r\n                <button type=\"submit\" class=\"btn btn-primary btn-block btn-flat\">Register</button>\r\n              </div>\r\n              <!-- /.col -->\r\n            </div>\r\n          </form>\r\n           <a href=\"/login\" class=\"text-center\">I already have an account</a>\r\n        </div>\r\n        <!-- /.form-box -->\r\n      </div>\r\n    </div>\r\n    <!--/.box-body-->\r\n\r\n    <!--/.box-footer-->\r\n  </div>\r\n  <!--/.box-->\r\n\r\n</section>\r\n<!--/.content-->\r\n"
 
 /***/ }),
 

@@ -25,15 +25,10 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(form: NgForm) {
-        if (form.valid) {
-            console.log('Submiting form...');
-            this.service.login({username: this.username, password: this.password}, (res) => {
-                if (res.data.user_id) {
-                    this.router.navigate(["dashboard"]);
-                }
-            });
-        } else {
-            window.alert('Please enter a valid Username & Password');
-        }
+        this.service.login({username: this.username, password: this.password}, (res) => {
+            if (res.data.user_id) {
+                this.router.navigate(["dashboard"]);
+            }
+        });
     }
 }

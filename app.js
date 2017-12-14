@@ -60,7 +60,11 @@ for (var i in controllers) {
     let controller = require(appConfig.dirControllers + conrtollerFileName)(Sequelize, passport);
     console.log('Loading Controller : ', conrtollerFileName, '|', 'Base Route : ', baseRoute);
     //assignin validation middleware to router
-    app.use('/' + baseRoute, validator[baseRoute]);
+    if (validator[baseRoute]) {
+        app.use('/' + baseRoute, validator[baseRoute]);
+    } else {
+        console.log('Validation layer missing in :', baseRoute);
+    }
     app.use(validator.validationResult);
     //loading controllers as app routes
     app.use('/' + baseRoute, controller);
