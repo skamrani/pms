@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
+import {Util} from '../helpers/util.helper';
 
 @Injectable()
 export class CustomHttp {
     private base_url: string = 'http://localhost:5000/';
     private requestOptions: any;
+    private util: Util;
     constructor(private http: HttpClient) {
-
+        this.util = new Util();
         this.requestOptions = {
             headers: new HttpHeaders({'Content-Type': 'application/json'}),
             withCredentials: true
@@ -17,6 +18,7 @@ export class CustomHttp {
     post(route: string, data: any, callback: Function) {
         //withCredentials allow the angular to parse session and resend the cookie
         this.http.post(this.base_url + route, data, this.requestOptions).subscribe(data => {
+            this.util.displayErrors(data);
             callback(data);
         }, err => {
             console.log('Something wen wrong', err);
@@ -50,7 +52,7 @@ export class UserService {
         console.log('Calling user/register');
         this.http.post('users/register', data, callback);
     }
-    
+
     logout(callback?: Function) {
         console.log('Calling user/logout');
         this.http.get('users/logout', callback);
