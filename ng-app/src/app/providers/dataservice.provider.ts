@@ -46,4 +46,8 @@ export class UserService {
         console.log('Calling user/login');
         this.http.post('user/login', data, callback);
     }
+    register(data: any, callback?: Function) {
+        console.log('Calling user/register');
+        this.http.post('user/register', data, callback);
+    }
 }

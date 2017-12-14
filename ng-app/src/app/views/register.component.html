@@ -1,0 +1,85 @@
+
+<!--Content Header (Page header)-->
+<section class="content-header">
+  <h1>
+    Register User !
+    <small>it all starts here</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> User</a></li>
+    <li><a  class="active" href="#">Register</a></li>
+  </ol>
+</section>
+
+<!--Main content-->
+<section class="content">
+
+  <!--Default box-->
+  <div class="box" style="background:none!important">
+    <div class="box-header with-border">
+
+    </div>
+    <div class="box-body">
+      <!--Start creating your amazing application!-->
+      <div class="register-box">
+        <div class="register-logo">
+          <a href=""><b>Create</b>User</a>
+        </div>
+
+        <div class="register-box-body">
+          <p class="login-box-msg">Register a new membership</p>
+          <form #frm="ngForm" (ngSubmit)="onSubmit(frm)">
+
+            <div class="form-group has-feedback">
+              <input type="email" class="form-control" name="email" id="email" placeholder="User Email" [(ngModel)]="email">
+              <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+              <input type="name"  id="username" name="username" class="form-control" placeholder="Employee Name" [(ngModel)]="username">
+              <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+              <input type="password" class="form-control" placeholder="Password" name="password" id="password" [(ngModel)]="password">
+              <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group">
+              <label>Assgin Team</label>
+              <select class="form-control" name="team" id="team" [(ngModel)]="team" >
+                <option  *ngFor="let team of teams"  value="{{team.id}}">{{team.text}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Role</label>
+              <div class="checkbox" *ngFor="let role of roles">
+                <label><input  [(ngModel)]="user_role" type="checkbox" name="role[]" value="{{role.id}}">{{role.text}}</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-8">
+                <div class="checkbox icheck">
+                  <label class="">
+                    <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> I agree to the <a href="#">terms</a>
+                  </label>
+                </div>
+              </div>
+              <!-- /.col -->
+              <div class="col-xs-4">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+              </div>
+              <!-- /.col -->
+            </div>
+          </form>
+           <a href="login.html" class="text-center">I already have an account</a>
+        </div>
+        <!-- /.form-box -->
+      </div>
+    </div>
+    <!--/.box-body-->
+
+    <!--/.box-footer-->
+  </div>
+  <!--/.box-->
+
+</section>
+<!--/.content-->

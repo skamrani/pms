@@ -12,6 +12,7 @@ import {HeaderComponent} from './components/header.component';
 import {SidebarComponent} from './components/sidebar.component';
 import {LoginComponent} from './components/login.component';
 import {BlankComponent} from './components/blank.component';
+import {RegisterComponent} from './components/register.component';
 
 const appRoutes: Routes = [
     {
@@ -19,6 +20,9 @@ const appRoutes: Routes = [
     },
     {
         path: 'login', component: LoginComponent
+    },
+    {
+        path: 'register', component: RegisterComponent
     }
 ];
 
@@ -28,7 +32,8 @@ const appRoutes: Routes = [
         HeaderComponent,
         SidebarComponent,
         LoginComponent,
-        BlankComponent
+        BlankComponent,
+        RegisterComponent
     ],
     imports: [
         BrowserModule,
