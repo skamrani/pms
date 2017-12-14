@@ -56,4 +56,11 @@ export class UserService {
         this.http.get('user/logout', callback);
 
     }
+
+    getRoles(callback?: Function) {
+      console.log('Calling user/roles');
+      this.http.get('roles', callback);
+
+    }
+
 }

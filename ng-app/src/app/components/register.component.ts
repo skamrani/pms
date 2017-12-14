@@ -8,12 +8,7 @@ import {NgForm} from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
- // Roles call from db for now its static
-  roles = [
-    {id: 1, text: 'Employee'},
-    {id: 2, text: 'TeamLead'},
-    {id: 3, text: 'Admin'},
-  ];
+//Roles call from db for now its static
 teams = [
   {id: 1, text: 'Innovation'},
   {id: 2, text: 'Activation'},
@@ -29,11 +24,20 @@ teams = [
   password: string;
   team:     string;
   role=    [];
+
   constructor(private service: UserService) {}
 
   ngOnInit(): void {
-
+    var allroles = [];
     console.log('Register component initialized');
+    // Get user Roles
+    this.service.getRoles( function (data) {
+
+      if(data.status==200){
+          allroles.push(data.data);
+      }
+    });
+    console.log("A",allroles);
   }
 
   onSubmit(form: NgForm) {
