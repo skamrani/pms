@@ -20,7 +20,7 @@ module.exports.users = (req, res, next) => {
     switch (req.originalUrl) {
         case '/user/login':
         {
-            req.check('username').exists().isEmail();
+            req.check('email').exists().isEmail();
             req.check('password').exists();
             break;
         }
