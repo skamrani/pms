@@ -20,7 +20,7 @@ module.exports.users = (req, res, next) => {
     switch (req.originalUrl) {
         case '/user/login':
         {
-            req.check('username').exists().isEmail();
+            req.check('email').exists().isEmail();
             req.check('password').exists();
             break;
         }
@@ -28,6 +28,17 @@ module.exports.users = (req, res, next) => {
     next();
 };
 
+module.exports.roles = (req, res, next) => {
+//    switch (req.originalUrl) {
+//        case '/user/login':
+//        {
+//            req.check('username').exists().isEmail();
+//            req.check('password').exists();
+//            break;
+//        }
+//    }
+    next();
+}
 function authChecker(req, res) {
     if (!req.user) {
         res.status(401);

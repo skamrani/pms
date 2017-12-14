@@ -5,11 +5,11 @@ let userModel = Sequelize.loadModel('users');
 
 
 passport.use(new LocalStrategy({
-    usernameField: 'username',
+    usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true,
 }, function (req, username, password, done) {
-    userModel.findOne({where: {username: username, password: password}}).then(user => {
+    userModel.findOne({where: {email: username, password: password}}).then(user => {
         if (user) {
             done(null, user.get());
         } else {
