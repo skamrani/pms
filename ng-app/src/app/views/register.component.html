@@ -51,15 +51,16 @@
             <div class="form-group">
               <label>Role</label>
               <div class="checkbox" *ngFor="let role of roles">
-                <label><input  [(ngModel)]="user_role" type="checkbox" name="role[]" value="{{role.id}}">{{role.text}}</label>
+                <label><input  (change) ="updateRoles($event)"  id= "{{role.id}}"type="checkbox" name="role" value="{{role.id}}">{{role.text}}</label>
               </div>
             </div>
 
             <div class="row">
               <div class="col-xs-8">
-                <div class="checkbox icheck">
+                <div class="checkbox icheck" style="display: none;">
                   <label class="">
-                    <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> I agree to the <a href="#">terms</a>
+                    <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative; ">
+                      <input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> I agree to the <a href="#">terms</a>
                   </label>
                 </div>
               </div>
@@ -70,7 +71,7 @@
               <!-- /.col -->
             </div>
           </form>
-           <a href="login.html" class="text-center">I already have an account</a>
+           <a href="/login" class="text-center">I already have an account</a>
         </div>
         <!-- /.form-box -->
       </div>
