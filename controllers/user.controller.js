@@ -29,8 +29,8 @@ module.exports = (Sequelize, passport, appConfig) => {
 
 
     router.post('/register', (req, res) => {
-            console.log(req.body);
-            res.send('post register');
+        console.log(req.body);
+        res.send('post register');
     });
 
 //    router.post('/login', passport.authenticate('local'), (req, res) => {
