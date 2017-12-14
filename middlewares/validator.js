@@ -18,7 +18,7 @@ module.exports.validationResult = (req, res, next) => {
 module.exports.users = (req, res, next) => {
     //swith trough the mataching route for validation
     switch (req.originalUrl) {
-        case '/user/login':
+        case '/users/login':
         {
             req.check('email').exists().isEmail();
             req.check('password').exists();
@@ -39,6 +39,7 @@ module.exports.roles = (req, res, next) => {
 //    }
     next();
 }
+
 function authChecker(req, res) {
     if (!req.user) {
         res.status(401);
