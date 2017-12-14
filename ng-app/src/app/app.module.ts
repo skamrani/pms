@@ -15,11 +15,11 @@ import {HeaderComponent} from './components/header.component';
 import {SidebarComponent} from './components/sidebar.component';
 import {LoginComponent} from './components/login.component';
 import {BlankComponent} from './components/blank.component';
-<<<<<<< HEAD
+
 import {RegisterComponent} from './components/register.component';
-=======
+
 import {DashboardComponent} from './components/dashboard.component';
->>>>>>> e0d303af46e48c66814fe2056afbea5aaa4ae34c
+
 
 const appRoutes: Routes = [
     {
@@ -33,15 +33,16 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-<<<<<<< HEAD
+
         path: 'login', component: LoginComponent
+
     },
     {
         path: 'register', component: RegisterComponent
-=======
-        path: 'login',
-        component: LoginComponent
->>>>>>> e0d303af46e48c66814fe2056afbea5aaa4ae34c
+
+
+
+
     }
 ];
 
