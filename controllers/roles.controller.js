@@ -12,7 +12,10 @@ module.exports = (Sequelize, passport, appConfig) => {
 
     router.get('/', (req, res) => {
         var r;
-        var roles = rolesModel.findAll({raw:true}).then(rolez => { r=rolez; res.sendJSON(r, 'ok', 200)});
+        var roles = rolesModel.findAll({raw: true}).then(rolez => {
+            r = rolez;
+            res.sendJSON(r, 'ok', 200)
+        });
 
 
     });

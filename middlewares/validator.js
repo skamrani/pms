@@ -15,14 +15,13 @@ module.exports.validationResult = (req, res, next) => {
     }
 };
 
-module.exports.user = (req, res, next) => {
+module.exports.users = (req, res, next) => {
     //swith trough the mataching route for validation
     switch (req.originalUrl) {
         case '/user/login':
         {
             req.check('username').exists().isEmail();
             req.check('password').exists();
-            console.log('called', req.validationErrors());
             break;
         }
     }
