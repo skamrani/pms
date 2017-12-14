@@ -22,14 +22,13 @@ teams = [
   {id: 5, text: 'Mobile Application Development'},
   {id: 6, text: 'Document'},
   {id: 6, text: 'Quality Assurance'},
-
-]
+  ];
 
   email:    string;
   username: string;
   password: string;
   team:     string;
-  role:     string;
+  role=    [];
   constructor(private service: UserService) {}
 
   ngOnInit(): void {
@@ -46,6 +45,16 @@ teams = [
     } else {
       window.alert('Please enter a valid Username & Password');
     }
+  }
+
+  updateRoles(event) {
+    if (event.target.checked) {
+      this.role.push(event.target.value);
+    } else {
+      this.role.splice(this.role.indexOf(event.target.value), 1);
+    }
+    console.log("RoleID: ", event.target.value);
+    console.log("RoleValue: ",  this.role);
   }
 
 }

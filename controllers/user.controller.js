@@ -1,10 +1,11 @@
 const express = require('express');
 const validator = require('../middlewares/validator');
 const router = express.Router();
+const users = require('../models/users.model');
 
 module.exports = (Sequelize, passport, appConfig) => {
-
-    let userModel = Sequelize.loadModel('user');
+    console.log('in user controller')
+    let userModel = Sequelize.loadModel('users');
 
     router.post('/login', (req, res, next) => {
         passport.authenticate('local', function (err, user, info) {
