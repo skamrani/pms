@@ -7,10 +7,13 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
-//Loading configures modules
+//Loading configured modules
 const appConfig = require('./config/app');
 const passport = require('./config/passport');
 const Sequelize = require('./config/sequelize');
+
+//Loading middlewares
+const response = require("./middlewares/response");
 
 //Initialize express
 const app = express();
@@ -24,7 +27,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -32,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
 app.set('view engine', 'handlebars');
 
-
+app.use(response);
 
 app.use(session({
     secret: 'centricsource',
@@ -57,11 +60,8 @@ for (var i in controllers) {
     app.use('/' + baseRoute, controller);
 }
 
-
-
 app.get('/test', (req, res) => {
-    let body = req.body || {status: false, data: nul};
-    res.json(body);
+    res.sendJSON({name: 'zubair'}, null, 401);
 });
 
 // catch 404 and forward to error handler

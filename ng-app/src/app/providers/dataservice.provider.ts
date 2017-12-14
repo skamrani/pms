@@ -39,15 +39,21 @@ export class UserService {
 
     constructor(private http: CustomHttp) {
         //testing api call
-        this.http.get('test', (res: any) => console.log(res));
     }
 
     login(data: any, callback?: Function) {
         console.log('Calling user/login');
         this.http.post('user/login', data, callback);
     }
+
     register(data: any, callback?: Function) {
-        console.log('Calling user/register');
-        this.http.post('user/register', data, callback);
+      console.log('Calling user/register');
+      this.http.post('user/register', data, callback);
+
+    }
+    logout(callback?: Function) {
+        console.log('Calling user/logout');
+        this.http.get('user/logout', callback);
+
     }
 }
