@@ -5,6 +5,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 const fs = require('fs');
 
 //Loading configured modules
@@ -14,6 +15,7 @@ const Sequelize = require('./config/sequelize');
 
 //Loading middlewares
 const response = require("./middlewares/response");
+const validator = require("./middlewares/validator");
 
 //Initialize express
 const app = express();
@@ -34,7 +36,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
 app.set('view engine', 'handlebars');
-
+app.use(expressValidator());
 app.use(response);
 
 app.use(session({
@@ -57,6 +59,14 @@ for (var i in controllers) {
     let baseRoute = arrFileName.shift();
     let controller = require(appConfig.dirControllers + conrtollerFileName)(Sequelize, passport);
     console.log('Loading Controller : ', conrtollerFileName, '|', 'Base Route : ', baseRoute);
+    //assignin validation middleware to router
+    if (validator[baseRoute]) {
+        app.use('/' + baseRoute, validator[baseRoute]);
+    } else {
+        console.log('Validation layer missing in :', baseRoute);
+    }
+    app.use(validator.validationResult);
+    //loading controllers as app routes
     app.use('/' + baseRoute, controller);
 }
 

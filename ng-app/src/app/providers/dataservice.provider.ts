@@ -1,3 +1,4 @@
+
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -43,17 +44,23 @@ export class UserService {
 
     login(data: any, callback?: Function) {
         console.log('Calling user/login');
-        this.http.post('user/login', data, callback);
+        this.http.post('users/login', data, callback);
     }
 
     register(data: any, callback?: Function) {
-      console.log('Calling user/register');
-      this.http.post('user/register', data, callback);
-
+        console.log('Calling user/register');
+        this.http.post('users/register', data, callback);
     }
+
     logout(callback?: Function) {
         console.log('Calling user/logout');
-        this.http.get('user/logout', callback);
+        this.http.get('users/logout', callback);
 
     }
+    getRoles(callback?: Function) {
+      console.log('Calling user/roles');
+      this.http.get('roles', callback);
+    }
+
 }
+

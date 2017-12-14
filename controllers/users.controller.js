@@ -1,9 +1,9 @@
 const express = require('express');
+const validator = require('../middlewares/validator');
 const router = express.Router();
-const users = require('../models/users.model');
 
 module.exports = (Sequelize, passport, appConfig) => {
-    console.log('in user controller')
+
     let userModel = Sequelize.loadModel('users');
 
     router.post('/login', (req, res, next) => {
@@ -12,11 +12,11 @@ module.exports = (Sequelize, passport, appConfig) => {
                 return next(err);
             }
             if (!user) {
-                res.sendJSON({}, info.message, 401);
+                return res.sendJSON({}, info.message, 401);
             }
             req.logIn(user, function (err) {
                 if (err) {
-                    res.sendJSON({error: err}, 'Exception', 500);
+                    return next(err);
                 }
                 res.sendJSON(user, 'User logedin successfully')
             });
@@ -27,7 +27,6 @@ module.exports = (Sequelize, passport, appConfig) => {
         req.logout();
         res.sendJSON({}, "User loged out");
     });
-
 
     router.post('/register', (req, res) => {
         console.log(req.body);

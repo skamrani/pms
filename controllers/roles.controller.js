@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 //const roles = require('../models/roles.model');
@@ -8,14 +9,12 @@ module.exports = (Sequelize, passport, appConfig) => {
     let rights = Sequelize.loadModel('rights');
     let rolesRightsModel = Sequelize.loadModel('role_rights');
 
-
-
-
-
     router.get('/', (req, res) => {
         var r;
-        var roles = rolesModel.findAll({raw:true}).then(rolez => { r=rolez; res.sendJSON(r, 'ok', 200)});
-
+        var roles = rolesModel.findAll({raw: true}).then(rolez => {
+            r = rolez;
+            res.sendJSON(r, 'ok', 200)
+        });
 
     });
 
@@ -39,3 +38,4 @@ module.exports = (Sequelize, passport, appConfig) => {
     });
     return router;
 };
+
