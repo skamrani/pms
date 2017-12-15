@@ -3,18 +3,14 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../providers/dataservice.provider'
 import {NgForm} from '@angular/forms';
 
+
 @Component({
     selector: 'app-register',
     templateUrl: '../views/register.component.html',
 })
 export class RegisterComponent implements OnInit {
 
-    // Roles call from db for now its static
-    roles = [
-        {id: 1, text: 'Employee'},
-        {id: 2, text: 'TeamLead'},
-        {id: 3, text: 'Admin'},
-    ];
+
     teams = [
         {id: 1, text: 'Innovation'},
         {id: 2, text: 'Activation'},
@@ -30,13 +26,34 @@ export class RegisterComponent implements OnInit {
     password: string;
     team: string;
     role = [];
+    public user_roles:void;
+    public user_teams:void;
+
     constructor(private service: UserService) {}
 
     ngOnInit(): void {
 
-        console.log('Register component initialized');
+      console.log('Register component initialized');
+      // Get user Roles
+      this.user_roles = this.getRole();
+      this.user_teams = this.getTeam();
     }
 
+    /* Function that get all roles form db+n*/
+    getRole(){
+      let that = this;
+      this.service.getRoles( function (data) {
+        that.user_roles= data.data;
+      });
+    }
+    /*Function for teams*/
+    getTeam(){
+      let that = this;
+      this.service.getTeam( function (data) {
+        that.user_teams= data.data;
+      });
+
+    }
     onSubmit(form: NgForm) {
 
         if (form.valid) {
