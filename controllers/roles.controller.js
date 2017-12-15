@@ -7,6 +7,7 @@ const router = express.Router();
 module.exports = (Sequelize, passport, appConfig) => {
     console.log('in roles controller')
     let rights = Sequelize.loadModel('rights');
+    let rolesModel = Sequelize.loadModel('roles');
     let rolesRightsModel = Sequelize.loadModel('role_rights');
 
     router.get('/', (req, res) => {
