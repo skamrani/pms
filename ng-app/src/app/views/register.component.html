@@ -45,13 +45,13 @@
             <div class="form-group">
               <label>Assgin Team</label>
               <select class="form-control" name="team" id="team" [(ngModel)]="team" >
-                <option  *ngFor="let team of teams"  value="{{team.id}}">{{team.text}}</option>
+                <option  *ngFor="let team of user_teams"  value="{{team}}">{{team}}</option>
               </select>
             </div>
             <div class="form-group">
               <label>Role</label>
-              <div class="checkbox" *ngFor="let role of roles">
-                <label><input  (change) ="updateRoles($event)"  id= "{{role.id}}"type="checkbox" name="role" value="{{role.id}}">{{role.text}}</label>
+              <div class="checkbox" *ngFor="let role of user_roles">
+                <label><input  (change) ="updateRoles($event)"  id= "{{role.id}}"type="checkbox" name="role" value="{{role.id}}">{{role.name}}</label>
               </div>
             </div>
 

@@ -58,8 +58,12 @@ export class UserService {
 
     }
     getRoles(callback?: Function) {
-      console.log('Calling user/roles');
+      console.log('Calling roles');
       this.http.get('roles', callback);
+    }
+    getTeam(callback?: Function) {
+      console.log('Calling user/teams');
+      this.http.get('users/get_all_teams', callback);
     }
 
 }
