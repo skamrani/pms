@@ -15,6 +15,7 @@ import {LoginComponent} from './components/login.component';
 import {BlankComponent} from './components/blank.component';
 import {RegisterComponent} from './components/register.component';
 import {DashboardComponent} from './components/dashboard.component';
+import {SelectComponent} from './helpers/select.component';
 
 
 const appRoutes: Routes = [
@@ -33,6 +34,10 @@ const appRoutes: Routes = [
 
     },
     {
+        path: 'blank', component: BlankComponent
+
+    },
+    {
         path: 'register', component: RegisterComponent
     }
 ];
@@ -45,7 +50,8 @@ const appRoutes: Routes = [
         SidebarComponent,
         LoginComponent,
         BlankComponent,
-        RegisterComponent
+        RegisterComponent,
+        SelectComponent
     ],
     imports: [
         BrowserModule,
