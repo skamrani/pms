@@ -5,6 +5,7 @@ const router = express.Router();
 module.exports = (Sequelize, passport, appConfig) => {
 
     let userModel = Sequelize.loadModel('users');
+    let usp = require('../service_providers/users_service_provider');
 
     router.post('/login', (req, res, next) => {
         passport.authenticate('local', function (err, user, info) {
@@ -43,5 +44,10 @@ module.exports = (Sequelize, passport, appConfig) => {
 
         res.send(users);
     });
+
+    router.get('/get_all_teams', (req, res) => {
+        //console.log(usp.getAllTeams())
+        res.sendJSON(usp.getAllTeams(), "ok", 200);
+    })
     return router;
 };
