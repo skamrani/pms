@@ -1,27 +1,27 @@
 /* jshint indent: 2 */
 
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('roles', {
-        id: {
-            type: DataTypes.INTEGER(10).UNSIGNED,
+    return sequelize.define('country', {
+        country_id: {
+            type: DataTypes.INTEGER(11),
             allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
         name: {
-            type: DataTypes.STRING(50),
+            type: DataTypes.STRING(64),
             allowNull: false
         },
-        created_at: {
-            type: DataTypes.DATE,
-            allowNull: true
+        iso_code: {
+            type: DataTypes.STRING(3),
+            allowNull: false
         },
-        updated_at: {
-            type: DataTypes.DATE,
+        is_active: {
+            type: DataTypes.INTEGER(1),
             allowNull: true
         }
     }, {
-        tableName: 'roles',
+        tableName: 'country',
         timestamps: false
     });
 };

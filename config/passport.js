@@ -1,31 +1,31 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const Sequelize = require('./sequelize');
-let userModel = Sequelize.loadModel('users');
+let userModel = require('../models/user.model')(Sequelize);
 
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true,
-}, function (req, username, password, done) {
-    userModel.findOne({where: {email: username, password: password}}).then(user => {
+}, function (req, email, password, done) {
+    userModel.findByEmailPassword(email, password, ['user_id', 'full_name', 'email'], (user) => {
         if (user) {
             done(null, user.get());
         } else {
             done(null, false, {message: 'User not found'});
         }
-    }).catch((err) => {
-        done(err, false);
     });
 }
 ));
 
 passport.serializeUser(function (user, done) {
+    console.log('serialized :', user);
     done(null, user);
 });
 
 passport.deserializeUser(function (user, done) {
+    console.log('de-serialized :', user);
     done(null, user);
 });
 

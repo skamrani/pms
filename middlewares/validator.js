@@ -40,6 +40,18 @@ module.exports.roles = (req, res, next) => {
     next();
 }
 
+module.exports.user = (req, res, next) => {
+    switch (req.originalUrl) {
+        case '/users/detail':
+        {
+            req.check('email').exists().isEmail();
+            req.check('password').exists();
+            break;
+        }
+    }
+    next();
+};
+
 function authChecker(req, res) {
     if (!req.user) {
         res.status(401);

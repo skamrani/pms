@@ -11,6 +11,6 @@ const sequelize = new Sequelize({
 });
 
 sequelize.loadModel = (modelName) => {
-    return sequelize.import(appConfig.dirModels + '/' + modelName + '.model');
+    return sequelize.import(appConfig.dirModels + '/' + modelName + '.def');
 };
 module.exports = sequelize;

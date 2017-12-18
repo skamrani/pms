@@ -34,8 +34,9 @@ const appRoutes: Routes = [
 
     },
     {
-        path: 'blank', component: BlankComponent
-
+        path: 'blank',
+        component: BlankComponent,
+        outlet: 'inner',
     },
     {
         path: 'register', component: RegisterComponent

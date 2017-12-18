@@ -1,19 +1,23 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('rights', {
-    id: {
-      type: DataTypes.INTEGER(10).UNSIGNED,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    right: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    }
-  }, {
-    tableName: 'rights',
-      timestamps: false
-  });
+module.exports = function (sequelize, DataTypes) {
+    return sequelize.define('role_rights', {
+        id: {
+            type: DataTypes.INTEGER(10).UNSIGNED,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        role_id: {
+            type: DataTypes.INTEGER(10).UNSIGNED,
+            allowNull: false
+        },
+        right_id: {
+            type: DataTypes.INTEGER(10).UNSIGNED,
+            allowNull: false
+        }
+    }, {
+        tableName: 'role_rights',
+        timestamps: false
+    });
 };
