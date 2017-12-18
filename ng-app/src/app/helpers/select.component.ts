@@ -3,7 +3,7 @@ import {CustomHttp} from '../providers/dataservice.provider';
 
 @Component({
     selector: 'app-select',
-    template: '<select id="{{textId}}" name="{{textName}}"><option  *ngFor="let team of data"  value="{{team}}">{{team}}</option></select>',
+    template: '<select class="{{textClass}}" id="{{textId}}" name="{{textName}}"><option  *ngFor="let team of valuefield"  value="{{team}}">{{team}}</option></select>',
 })
 export class SelectComponent implements OnInit {
 
@@ -12,12 +12,14 @@ export class SelectComponent implements OnInit {
     @Input() textField: string;
     @Input() textId: string;
     @Input() textName: string;
+    @Input() textClass: string;
     public data: any;
 
     ngOnInit(): void {
 
         console.log('Select component initialized', this.url);
         this.valuefield = this.getTeam();
+        console.log(this.valuefield );
     }
 
     constructor(private service: CustomHttp) {}
@@ -25,7 +27,7 @@ export class SelectComponent implements OnInit {
     getTeam(){
       let that = this;
       this.service.get(this.url, (data) => {
-        that.valuefield = data;
+        that.valuefield = data.data;
       })
     }
 
