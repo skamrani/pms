@@ -12,34 +12,39 @@ import {AppComponent} from './components/app.component';
 import {HeaderComponent} from './components/header.component';
 import {SidebarComponent} from './components/sidebar.component';
 import {LoginComponent} from './components/login.component';
+import {LogoutComponent} from './components/logout.component';
 import {BlankComponent} from './components/blank.component';
 import {RegisterComponent} from './components/register.component';
 import {DashboardComponent} from './components/dashboard.component';
+//User
+import {CreateUserComponent} from './components/create_user.component'
 import {SelectComponent} from './helpers/select.component';
 
 
 const appRoutes: Routes = [
     {
-        path: '',
-        component: DashboardComponent,
-        canActivate: [AuthGuard]
-    },
-    {
         path: 'dashboard',
         component: DashboardComponent,
-        canActivate: [AuthGuard]
     },
     {
-        path: 'login', component: LoginComponent
-
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'logout',
+        component: LogoutComponent
     },
     {
         path: 'blank',
-        component: BlankComponent,
-        outlet: 'inner',
+        component: BlankComponent
     },
     {
-        path: 'register', component: RegisterComponent
+        path: 'register',
+        component: RegisterComponent
+    },
+    {
+        path: 'user/new',
+        component: CreateUserComponent
     }
 ];
 
@@ -50,9 +55,11 @@ const appRoutes: Routes = [
         HeaderComponent,
         SidebarComponent,
         LoginComponent,
+        LogoutComponent,
         BlankComponent,
         RegisterComponent,
-        SelectComponent
+        SelectComponent,
+        CreateUserComponent
     ],
     imports: [
         BrowserModule,

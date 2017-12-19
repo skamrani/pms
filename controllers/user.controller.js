@@ -5,11 +5,6 @@ const router = express.Router();
 module.exports = (Sequelize, passport, appConfig) => {
 
     let userModel = require('../models/user.model')(Sequelize);
-//    console.log(userModel.findByEmailPassword);
-
-    router.get('/test', (req, res) => {
-        res.sendJSON({});
-    });
 
     /**
      * @api {post} user/login User:login
@@ -35,7 +30,6 @@ module.exports = (Sequelize, passport, appConfig) => {
         })(req, res, next);
     });
 
-
     /**
      * @api {post} user/detail User:detail
      * @apiName user_detail
@@ -49,10 +43,25 @@ module.exports = (Sequelize, passport, appConfig) => {
         });
     });
 
+    /**
+     * @api {get} user/authenticate User:authenticate
+     * @apiName user_authenticate
+     * @apiGroup User
+     */
+    router.get("/authenticate", (req, res) => {
+        if (!req.user) {
+            res.sendJSON({}, 'User is not loged in', 401);
+        } else {
+            res.sendJSON(req.user, 'User authentication was successful');
+        }
+    });
+
     router.get("/logout", (req, res) => {
         req.logout();
         res.sendJSON({}, "User loged out");
     });
+
+
 
 //    router.get('/roles', (req, res) => {
 //

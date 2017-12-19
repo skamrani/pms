@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-declare var $: any;
+declare var $: any, alertify: any;
 export class Util {
 
     displayErrors(response: any) {
@@ -25,7 +25,9 @@ export class Util {
                 formGroup.append(helpBlock);
 
             }
+            alertify.log(response["msg"], "error");
+        } else {
+            alertify.log(response["msg"]);
         }
-
     }
 }

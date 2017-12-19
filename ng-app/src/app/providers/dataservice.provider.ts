@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
 import {Util} from '../helpers/util.helper';
 
 @Injectable()
@@ -7,10 +8,10 @@ export class CustomHttp {
     private base_url: string = 'http://localhost:5000/';
     private requestOptions: any;
     private util: Util;
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         this.util = new Util();
         this.requestOptions = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'}),
+            //            headers: new HttpHeaders({'Content-Type': 'application/json'}),
             withCredentials: true
         };
     }
@@ -20,8 +21,8 @@ export class CustomHttp {
         this.http.post(this.base_url + route, data, this.requestOptions).subscribe(data => {
             this.util.displayErrors(data);
             callback(data);
-        }, err => {
-            console.log('Something wen wrong', err);
+        }, (err) => {
+            this.errChecker(err);
         });
     }
 
@@ -29,9 +30,20 @@ export class CustomHttp {
         this.http.get(this.base_url + route, this.requestOptions)
             .subscribe(data => {
                 callback(data);
-            }, err => {
-                console.log('Something wen wrong', err);
+            }, (err) => {
+                this.errChecker(err);
             });
+    }
+
+    errChecker(err: any) {
+
+        if (err.status == 401) {
+            this.router.navigate(['']).then((res) => {
+                if (res) {
+                    window.location.reload();
+                }
+            });
+        }
     }
 
 }
@@ -44,8 +56,11 @@ export class UserService {
     }
 
     login(data: any, callback?: Function) {
-        console.log('Calling user/login');
-        this.http.post('users/login', data, callback);
+        this.http.post('user/login', data, callback);
+    }
+
+    authenticate(callback?: Function) {
+        this.http.get('user/authenticate', callback);
     }
 
     register(data: any, callback?: Function) {
@@ -55,9 +70,10 @@ export class UserService {
 
     logout(callback?: Function) {
         console.log('Calling user/logout');
-        this.http.get('users/logout', callback);
+        this.http.get('user/logout', callback);
 
     }
+
     getRoles(callback?: Function) {
         console.log('Calling user/roles');
         this.http.get('roles', callback);

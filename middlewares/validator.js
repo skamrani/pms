@@ -15,18 +15,6 @@ module.exports.validationResult = (req, res, next) => {
     }
 };
 
-module.exports.users = (req, res, next) => {
-    //swith trough the mataching route for validation
-    switch (req.originalUrl) {
-        case '/users/login':
-        {
-            req.check('email').exists().isEmail();
-            req.check('password').exists();
-            break;
-        }
-    }
-    next();
-};
 
 module.exports.roles = (req, res, next) => {
 //    switch (req.originalUrl) {
@@ -38,14 +26,19 @@ module.exports.roles = (req, res, next) => {
 //        }
 //    }
     next();
-}
+};
 
 module.exports.user = (req, res, next) => {
     switch (req.originalUrl) {
-        case '/users/detail':
+        case '/user/login':
         {
             req.check('email').exists().isEmail();
-            req.check('password').exists();
+            req.check('password').exists().isLength({min: 8});
+            break;
+        }
+        case '/user/detail':
+        {
+            req.check('user_id').exists().isInt();
             break;
         }
     }
