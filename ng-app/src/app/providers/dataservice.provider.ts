@@ -63,15 +63,23 @@ export class UserService {
         this.http.get('user/authenticate', callback);
     }
 
-    register(data: any, callback?: Function) {
-        console.log('Calling user/register');
-        this.http.post('users/register', data, callback);
-    }
-
     logout(callback?: Function) {
         console.log('Calling user/logout');
         this.http.get('user/logout', callback);
 
+    }
+
+    addUser(data: any, callback?: Function) {
+        this.http.post('user/add', data, callback);
+    }
+
+    getDetails(user_id: number, callback?: Function) {
+        this.http.post("user/details", {user_id: user_id}, callback);
+    }
+
+    register(data: any, callback?: Function) {
+        console.log('Calling user/register');
+        this.http.post('users/register', data, callback);
     }
 
     getRoles(callback?: Function) {

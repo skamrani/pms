@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const session = require('express-session');
 const path = require('path');
 const logger = require('morgan');
@@ -20,15 +21,11 @@ const authcheker = require("./middlewares/authchecker");
 
 //Initialize express
 const app = express();
-
-app.use(function (req, res, next) {
-    //allowing ng app to call this server
-    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
-    res.header("'Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Credentials", true);
-    next();
-});
+app.use(cors({
+    origin: true,
+    credentials:true
+}));
+app.options('*', cors()); // include before other routes
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

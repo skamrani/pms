@@ -15,7 +15,6 @@ module.exports.validationResult = (req, res, next) => {
     }
 };
 
-
 module.exports.roles = (req, res, next) => {
 //    switch (req.originalUrl) {
 //        case '/user/login':
@@ -39,6 +38,15 @@ module.exports.user = (req, res, next) => {
         case '/user/detail':
         {
             req.check('user_id').exists().isInt();
+            break;
+        }
+        case '/user/add':
+        {
+            req.check('email').exists().isEmail();
+            req.check('full_name').exists().isLength({min:3});
+            req.check('password').exists().isLength({min:8});
+            req.check('team_id').exists().isNumeric();
+            req.check('role').exists().isNumeric();
             break;
         }
     }

@@ -19,7 +19,7 @@ export class Util {
                     text: objError['msg']
                 });
                 console.log('Error:', objError.param);
-                var formGroup = $('input[name="' + objError.param + '"]').parents('.form-group');
+                var formGroup = $('input[name="' + objError.param + '"], select[name="' + objError.param + '"]').parents('.form-group');
                 formGroup.removeClass('has-error').addClass('has-error').addClass('response-error');
                 formGroup.find('.help-block').remove();
                 formGroup.append(helpBlock);

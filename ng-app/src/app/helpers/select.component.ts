@@ -1,34 +1,45 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {CustomHttp} from '../providers/dataservice.provider';
 
 @Component({
     selector: 'app-select',
-    template: '<select class="{{textClass}}" id="{{textId}}" name="{{textName}}"><option  *ngFor="let team of valuefield"  value="{{team}}">{{team}}</option></select>',
+    template: `<select #select class="{{attrClass}}" id="{{attrId}}" name="{{attrName}}" (change)="onChange(select)">
+    <option *ngFor="let item of items"  value="{{item[valueField]}}">{{item[textField]}}</option>
+</select>`,
 })
 export class SelectComponent implements OnInit {
 
     @Input() url: string;
-    @Input() valuefield: void;
+    @Input() valueField: string;
     @Input() textField: string;
-    @Input() textId: string;
-    @Input() textName: string;
-    @Input() textClass: string;
-    public data: any;
+    @Input() modelBind: string;
+
+    @Input() attrName: string;
+    @Input() attrId: string;
+    @Input() attrClass: string = "form-control select-select2";
+
+    @Output() sendValue: EventEmitter<string> = new EventEmitter<string>();
+
+    public items: any;
 
     ngOnInit(): void {
-
         console.log('Select component initialized', this.url);
-        this.valuefield = this.getTeam();
-        console.log(this.valuefield );
+        this.getData();
     }
 
     constructor(private service: CustomHttp) {}
 
-    getTeam(){
-      let that = this;
-      this.service.get(this.url, (data) => {
-        that.valuefield = data.data;
-      })
+    getData() {
+        let that = this;
+        this.service.get(this.url, (data: any) => {
+            if (data["data"]) {
+                that.items = data["data"] || [];
+            }
+        })
+    }
+
+    onChange(select: any) {
+        this.sendValue.emit(select.value);
     }
 
 

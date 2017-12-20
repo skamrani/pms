@@ -56,9 +56,32 @@ module.exports = (Sequelize, passport, appConfig) => {
         }
     });
 
+    /**
+     * @api {get} user/logout User:logout
+     * @apiName user_logout
+     * @apiGroup User
+     */
     router.get("/logout", (req, res) => {
         req.logout();
         res.sendJSON({}, "User loged out");
+    });
+
+    /**
+     * @api {post} user/add User:add
+     * @apiName user_add
+     * @apiGroup User
+     * @apiParam {String} email
+     * @apiParam {String} full_name
+     * @apiParam {String} password
+     */
+    router.post("/add", (req, res) => {
+        console.log('Called');
+        let data = req.body;
+        userModel.addUser(data, (user) => {
+            if (user) {
+                res.sendJSON({user_id: user.get('user_id')}, "New user added successfully");
+            }
+        });
     });
 
 

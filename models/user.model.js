@@ -23,6 +23,13 @@ module.exports = (Sequelize) => {
         }).catch(displayError, callback);
     };
 
+    model.addUser = (data, callback) => {
+        model.create(data).then(callback).catch((err) => {
+            displayError(err, callback);
+        });
+
+    };
+
     return model;
 };
 
